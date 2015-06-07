@@ -16,7 +16,7 @@ class ToursController extends \BaseController {
      */
     public function index()
     {
-        if (Request::isJson()) {
+        if (Request::wantsJson()) {
             $time10 = strtotime('2015-06-07 10:00:00' . ' EST');
             $time1030 = strtotime('2015-06-07 10:30:00' . ' EST');
             $time11 = strtotime('2015-06-07 11:00:00' . ' EST');
