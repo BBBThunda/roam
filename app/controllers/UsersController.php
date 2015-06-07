@@ -43,17 +43,15 @@ class UsersController extends BaseController {
                 ->withErrors($validator)
                 ->withInput();
         }
-        $arrray = [                                                  
-            'email' => Input::get('email'),                                     
-            'display_name' => Input::get('display_name'),                   
-            'password' => Hash::make(Input::get('password'))                
-        ];
-        
+
+        $isGuide = !empty(Input::get('is_guide')) ? 1 : 0;
+
         // Create user
         $user = User::create([
             'email' => Input::get('email'),
                 'display_name' => Input::get('display_name'),
-                'password' => Hash::make(Input::get('password'))
+                'password' => Hash::make(Input::get('password')),
+                'is_guide' => $isGuide
             ]);
 
         return View::make('users.welcome');
