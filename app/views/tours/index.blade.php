@@ -8,97 +8,162 @@
     border-width: 5px;
     height: 500px;
 }
-.span5{
-    margin-right: 0px;
+body{
+    background-color: #F2F2F2;
 }
-.row {
-    margin-left: 3%;
+.one {
+    float:left;
+    width: 43%;
+    margin-top: 40px;
+    margin-right: 50px;
 }
-.map {
-    margin-left: 3%;
+.two {
+    margin-top: 40px;
+    height: 100%;
 }
 h1 {
     text-align: center;
     padding-bottom: 4%;
 }
 .background {
-    background-image: url("pictures/greentown.jpg");
+    background-image: url("images/quincy.jpg");
     width: 400px;
     height: 250px;
 }
 .guide_pic {
-    border-width: 8px;
-    border-style: solid;
-    border-color: white;
+    border-right: 8px solid white;
+    border-bottom: 8px solid white;
+
 }
 .tour_name {
     padding-top: 10px;
     padding-bottom: 10px;
     margin: 0px;
 }
-td {
-    padding: 20px 10px 30px 10px;
-    border-width: 2px;
+
+ul
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#tourDataContainer li {
+    padding: 0px 5px 40px 5px;
     border-style: solid;
-    background-color: white;
+    border-width: 2px;
+    border-color: #B1B1B1;
+    margin-bottom: 20px;
+}
+.btn {
+    text-align: right;
+    float: right;
+}
+.star {
+    float: right;
+    height: 20px;
 }
 
 </style>
 
-
-
-
-
-
-
 <div class="row">
-    <div class="span6">
+    <div class="one">
         <h3>Available Tours for Boston, MA</h3>
     
             <ul id="tourDataContainer">
                 <li>
-                    <div class="background">
-                        <img class="guide_pic" src="pictures/stockPic_17.jpg">
-                    </div>
-                    <h4 class="tour_name">Greentown Labs by Saran</h4>
-                    <!--<p>An innovation in of itself, Boston has taken the world of tech by storm over the last decade. Already globally established are the areas' innovation centers, incubators, universities, co-workspaces, bio-tech and leading tech businesses. The geographic and innovation diversity does not stop there.  Greentown Labs, based in Somerville, is a camp of some of the world's best in environmental technology.As ambitious and innovative as the changing world around us, Greentown is intent on sustaining its pace and impact into the future.</p>-->
-                </li>
-                <li>
-                    <img src=""><h4>Boston Commons</h4><p>Walk and let walk. This region of Boston is perfectly suited to combine exercise with wonder in the heart of it all. Starting at the State House you will achieve the seemingly impossible feat of connecting government center, the financial district, the Back Bay, Boston Common and its Public Garden in less than 3 miles. Next stop, the Boston Marathon? </p>
-                </li>
-                <li>
-                    <img src=""><h4>Quincy Market</h4><p>Its no secret that Boston is a focal point of the nation's birth. It will be your secret when you experience the Hub of history on your terms and off the beaten path. All of the locations of the freedom trail are on the historical tour. Yet, the timeline since Paul Revere is walked with rare and non-scripted anecdotes being spoken and guided into your own personal curiosity. </p>
-                </li>
-            </ul>
-        <!--<div style ="background-color:#aaa">
-          <h9>id=1</h9>
-        <h3>Greg's awsome tour!!</h3>
-        <img src="sprint.png" style = "width:50;height:50;">
-        <h5>My tour is so cool and you should definatly go! It's sooooo awsome!!!!!!!11!!1!1</h5>
-        <button data-tour-id = "1" class="target" type = "button"> Book This Tour!</button>
-        </div>
-      <br><br>
-        <div style = "background-color:#aaa">
-          <h9>id=2</h9>
-        <h3>Bob's awsome tour!!</h3>
-        <img src="sprint.png" style = "width:50;height:50;"></img>
-        <h5>My tour is so cool. It's better than greg's</h5>
-        <button data-tour-id = "2" class="target" type = "button"> Book This Tour!</button>
-        </div>
-        <script src = "scripts/main.js"></script> -->       
+                    <div class="panel panel-default">
+                          <div class="panel-body text-center">
+                            <h2>Quincy Market</h2>
+                            <div class="pull-right">
+                                <p style="float:right;">Tech<p>
+                            </div>
+                          </div>
+                          <div class="background">
+                            <img src="pictures/stockPic_9.jpg" alt="image" class="guide_pic" />
+                        </div>
+                        <h3 class="tour_name">Lauren</h3>
+                        <div class="pull-right">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                        </div>
+                        <hr>
+                          <div class="panel-body">
+                            <div>
+                            <h3 style= "text-align:left; float: left;">$33</h3>
+                              <div class="pull-right">
+                                <a href="#" class="btn btn-primary btn-xs">Check Out This Tour</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </li>
+                    <li>
+                    <div class="panel panel-default">
+                          <div class="panel-body text-center">
+                            <h2>Greentown Lab</h2>
+                            <div class="pull-right">
+                                <p style="float:right;">Tech<p>
+                            </div>
+                          </div>
+                          <div class="background">
+                            <img src="pictures/anna.jpg" alt="image" class="guide_pic" />
+                        </div>
+                        <h3 class="tour_name">Anna</h3>
+                        <div class="pull-right">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                        </div>
+                        <hr>
+                          <div class="panel-body">
+                            <div>
+                            <h3 style= "text-align:left; float: left;">$36</h3>
+                              <div class="pull-right">
+                                <a href="#" class="btn btn-primary btn-xs">Check Out This Tour</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </li>
+                    <li>
+
+                        <div class="panel panel-default">
+                          <div class="panel-body text-center">
+                            <h2>Boston Commons</h2>
+                            <div class="pull-right">
+                                <p style="float:right;">Tech<p>
+                            </div>
+                          </div>
+                          <div class="background">
+                            <img src="pictures/stockPic_17.jpg" alt="image" class="guide_pic" />
+                        </div>
+                        <h3 class="tour_name">Reis</h3>
+                        <div class="pull-right">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                            <img class="star" src="pictures/Star.png">
+                        </div>
+                        <hr>
+                          <div class="panel-body">
+                            <div>
+                            <h3 style= "text-align:left; float: left;">$25</h3>
+                              <div class="pull-right">
+                                <a href="#" class="btn btn-primary btn-xs">Check Out This Tour</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>    
     </div>
-    <div class="span6 map">
+    <div class="two map">
         <div id="map_canvas"></div>
     </div>
 
 </div>
-
-
-
-
-
-
-
 
 
 
