@@ -35,3 +35,4 @@ Route::get('home', [
     'uses' => 'UsersController@home'])->before('auth');
 
 Route::resource('tours', 'ToursController');
+
