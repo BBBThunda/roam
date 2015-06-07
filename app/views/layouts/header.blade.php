@@ -1,6 +1,10 @@
 <script src = "/scripts/jquery/jquery-1.11.3.min.js"></script>    
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
 <style type="text/css">
+body{
+    background-color: #F2F2F2;
+}
 .navbar {
     margin: 0px;
     font-size: 20px;
@@ -12,7 +16,9 @@
 .navbar-nav li a {
     line-height: 38px;
 }
-
+.container {
+    width: 100%;
+}
 </style>
 
 
@@ -53,7 +59,8 @@
 
             @endif
         </ul>
-        </div>
-
     </div>
-    <div class="container">
+
+</div>
+
+<div class="container">
