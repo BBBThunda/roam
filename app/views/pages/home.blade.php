@@ -6,10 +6,12 @@
 .fist_block{
     padding-left: 17%;
     padding-top: 15%;
+    width:100%;
     height: 400px;
     background-image: url("/pictures/IMG_0026.gif");
     background-repeat: no-repeat;
     background-size: 1200px;
+    background-width: 100%;
     /*background-color: #2B2B68;*/
     color: white;
 }

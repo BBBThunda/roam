@@ -64,4 +64,3 @@ body{
 
 </div>
 
-<div class="container">
