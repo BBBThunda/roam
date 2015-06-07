@@ -27,7 +27,6 @@ class ToursController extends \BaseController {
         $jstime1330 = ($time1330*1000);
         
         // Get tours within the user's area
-        dd(Auth::user()->is_guide);
         if (empty(Auth::user()->is_guide)) {
             return ('[
         {"tour_guide_display_name":"Jason",
@@ -53,7 +52,7 @@ class ToursController extends \BaseController {
         "end_time":"' . $time1330 . '",
         "latitude":"42.355477",
         "longitude":"-71.063918" 
-        }');
+        }]');
         } else {
             return ('[
         {"attendee_display_name":"Julian",
@@ -64,7 +63,7 @@ class ToursController extends \BaseController {
         "longitude":"-71.042271",
         "distance":"10",
         "attendee_id":"4"
-        }
+        },
         {"attendee_display_name":"Stuart",
         "tour_type_id":"1",
         "start_time":"' . $time1130 . '",
@@ -73,7 +72,7 @@ class ToursController extends \BaseController {
         "longitude":"-71.115820",
         "distance":"15",
         "attendee_id":"5"
-        }');
+        }]');
         }
     }
 
