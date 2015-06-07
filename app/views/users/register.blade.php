@@ -35,6 +35,13 @@
 {{ Form::label('password_confirmation', 'Confirm password') }}
 {{ Form::password('password_confirmation') }}
 
+{{-- Checkbox to indicate user is a tour guide. ---}}
+<fieldset>
+    {{ Form::checkbox('is_guide') }}
+    {{ Form::label('is_guide', 'I\'m a Tour Guide',
+    ['style' => 'display:inline;']) }}
+</fieldset><br />
+
 {{-- Form submit button. --------------------}}
 {{ Form::submit('Register') }}
 
