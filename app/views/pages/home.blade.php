@@ -28,7 +28,9 @@
                 <option>10:00 pm</option>
                 <option>11:00 pm</option>
             </select>
-            <button type="submit" class="btn">Find Tours</button>
+            <form action="/tours">
+                <button type="submit" class="btn">Find Tours</button>
+            </form>
         </form>
     </div>
 </div>

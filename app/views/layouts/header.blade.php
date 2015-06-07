@@ -33,6 +33,7 @@
                 <li><a href="#">Trust &mp; Safety</a></li>
                 <li><a href="quiz">Frequently Asked Questions</a></li>
             </ul>
+            <li><a href="/tour/create">Create A Tour</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
             @if (Auth::guest())
