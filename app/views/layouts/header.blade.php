@@ -1,5 +1,5 @@
-<script src = "scripts/jquery/jquery-1.11.3.min.js"></script>    
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src = "/scripts/jquery/jquery-1.11.3.min.js"></script>    
+<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 .navbar {
     margin: 0px;
@@ -24,7 +24,7 @@
 <div class="navbar">
     <div class="navbar-inner">
         <a class="brand" href="/">
-            <img id="logo_pic" src="pictures/ROAM_header.png">
+            <img id="logo_pic" src="/pictures/ROAM_header.png">
         </a>
         <ul class="nav navbar-nav">
             <li><a href="/tours">Book a Tour</a></li>
