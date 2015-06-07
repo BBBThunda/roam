@@ -152,7 +152,7 @@ class ToursController extends \BaseController {
 
             ]);
 
-        return View::make('users.home');
+        return Redirect::to('/');
     }
 
 
