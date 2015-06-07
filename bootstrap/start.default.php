@@ -33,8 +33,7 @@ $env = $app->detectEnvironment(function() {
 
     $hostname = gethostname();
     switch ($hostname) {
-    case 'proj.ectify.com':
-    case 'ectify.com':
+    case 'linode.server.com':
         return 'live';
     case 'stagingServerHostname':
         return 'staging';
