@@ -73,9 +73,9 @@ class UsersController extends BaseController {
             return Redirect::to('/login');
         }
 
-        $user = User::find(Auth::id());
+        $data['user'] = User::find(Auth::id());
 
-        return View::make('users.editProfile')->with('user', $user);
+        return View::make('users.editProfile')->with('user', $data['user']);
 
     }
 
@@ -96,18 +96,33 @@ class UsersController extends BaseController {
 
         $user = User::find(Auth::id());
 
-        // Validate user input
+/*        // Validate user input
         $validator = User::validate(Input::all(), $user->id);
         if ($validator->fails()) {
             return Redirect::back()
                 ->withErrors($validator)
                 ->withInput();
         }
+ */
+        if (!$user) {
+            return App::abort(403);
+        }
 
-        // Update user table
+        // Validate user input
+        $rules = array(
+            'email' => array('required', 'email', 'unique:users'),
+            'display_name' => array('required', 'alpha_num', 'min:3', 'max:32', 'unique:users'),
+            'password' => array('confirmed')
+        );
+            
+            // Update user table
         try {
             $user->display_name = Input::get('display_name');
-            $user->password = Hash::make(Input::get('password'));
+            if(!empty(Input::get('password'))) {
+                $user->password = Hash::make(Input::get('password'));
+            }
+            $isGuide = !empty(Input::get('is_guide')) ? 1 : 0;
+            $user->is_guide = $isGuide;
             $user->save();
         }
         catch (Exception $e) {
@@ -116,7 +131,7 @@ class UsersController extends BaseController {
             return Redirect::back()->with('message', $message);
         }
 
-        return Redirect::to('/home')->with('message', $message);
+        return Redirect::to('/tours')->with('message', $message);
 
     }
 

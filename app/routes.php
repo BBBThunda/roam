@@ -34,5 +34,12 @@ Route::get('home', [
     'as' => 'users.home',
     'uses' => 'UsersController@home'])->before('auth');
 
+Route::get('editProfile', [
+    'as' => 'users.edit',
+    'uses' => 'UsersController@editProfile'])->before('auth');
+Route::post('updateProfile', [
+    'as' => 'users.update',
+    'uses' => 'UsersController@updateProfile'])->before(['auth','csrf']);
+
 Route::resource('tours', 'ToursController');
 
