@@ -33,13 +33,22 @@ body{
             <img id="logo_pic" src="/pictures/ROAM_header.png">
         </a>
         <ul class="nav navbar-nav">
-            <li><a href="/tours">Book a Tour</a></li>
+            
+            @if ($userinfo->is_guide)
+            <li><a href="/tours">Find a Roamer</a></li>
+            @else
+            <li><a href="/tours">Find a Tour</a></li>
+            @endif
             {{-- <li><a href="#">How It Works</a></li> --}}
             <ul class="dropdown-menu">
                 <li><a href="#">Trust &mp; Safety</a></li>
                 <li><a href="quiz">Frequently Asked Questions</a></li>
             </ul>
-            <li><a href="/tours/create">Create A Tour</a></li>
+            @if ($userinfo->is_guide)
+            <li><a href="/tours/create">Schedule A Tour</a></li>
+            @else
+            <li><a href="/tours/create">Request a Tour</a></li>
+            @endif
         </ul>
         <ul class="nav navbar-nav pull-right">
             @if (Auth::guest())
@@ -48,7 +57,7 @@ body{
             @else
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {{{ User::find(Auth::id())->display_name }}}
+                {{{ $userinfo->display_name }}}
                 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
                 <li><a href="/home">Home</a></li>
@@ -57,7 +66,6 @@ body{
                 <li><a href="/logout">Sign Out</a></li>
             </ul>
             </li>
-
             @endif
         </ul>
     </div>

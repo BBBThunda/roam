@@ -15,4 +15,12 @@ class BaseController extends Controller {
 		}
 	}
 
+        /**
+         * Extend the constructor
+         */
+        public function __construct() {
+            $userId = Auth::id();
+            $user = User::find($userId);
+            View::share('userinfo', $user);
+        }
 }
