@@ -44,6 +44,7 @@ class UsersController extends BaseController {
                 ->withInput();
         }
 
+
         $isGuide = !empty(Input::get('is_guide')) ? 1 : 0;
 
         // Create user
@@ -114,7 +115,7 @@ class UsersController extends BaseController {
             'display_name' => array('required', 'alpha_num', 'min:3', 'max:32', 'unique:users'),
             'password' => array('confirmed')
         );
-            
+
             // Update user table
         try {
             $user->display_name = Input::get('display_name');

@@ -32,7 +32,7 @@ class AddIsGuideToUsers extends Migration {
         {
             //Drop 'is_guide' column
             Schema::table('users', function(Blueprint $table) {
-                $table->dropColumn('enabled');
+                $table->dropColumn('is_guide');
             });
         }
     }
