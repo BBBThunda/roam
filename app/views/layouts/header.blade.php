@@ -27,8 +27,8 @@
             <img id="logo_pic" src="pictures/ROAM_header.png">
         </a>
         <ul class="nav navbar-nav">
-            <li><a href="#">Book a Tour</a></li>
-            <li><a href="#">How It Works</a></li>
+            <li><a href="/tours">Book a Tour</a></li>
+            {{-- <li><a href="#">How It Works</a></li> --}}
             <ul class="dropdown-menu">
                 <li><a href="#">Trust &mp; Safety</a></li>
                 <li><a href="quiz">Frequently Asked Questions</a></li>
@@ -37,7 +37,7 @@
         <ul class="nav navbar-nav pull-right">
             @if (Auth::guest())
             <li><a href="/login">Log In</a></li>
-            <li><a href="#">Sign Up</a></li>
+            <li><a href="/register">Sign Up</a></li>
             @else
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

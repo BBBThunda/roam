@@ -41,7 +41,7 @@ class SessionsController extends BaseController {
             if(Auth::attempt($credentials))
             {
                 //if successfull redirect the user 
-                return Redirect::to('home');
+                return Redirect::to('/tours');
             }
             //else send back the login failure message.
             return Redirect::back()->withInput()->with('failure','username or password is invalid!');
