@@ -33,3 +33,5 @@ Route::post('register', [
 Route::get('home', [
     'as' => 'users.home',
     'uses' => 'UsersController@home'])->before('auth');
+
+Route::resource('tours', 'ToursController');
