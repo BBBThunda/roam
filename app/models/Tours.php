@@ -10,6 +10,6 @@ class Tours extends Eloquent {
         protected $table = 'tours';
 
         protected $fillable = array('name', 'description'
-            , 'tour_type_id');
+            , 'tour_type_id', 'tour_guide_id', 'is_guide', 'attendee_id');
 
 }

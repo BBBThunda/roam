@@ -45,7 +45,7 @@
     if ($user->is_guide) {
     $checked['checked'] = 'checked';
     } ?>
-    {{ Form::checkbox('is_guide', '', $checked) }}
+    {{ Form::checkbox('is_guide', 1, $checked) }}
     {{ Form::label('is_guide', 'I\'m a Tour Guide',
     ['style' => 'display:inline;']) }}
 </fieldset><br />

@@ -151,6 +151,17 @@ class ToursController extends \BaseController {
                 'tour_type_id' => Input::get('tour_type_id'),
 
             ]);
+        $userId = Auth::id();
+        $user = User::find($userId);
+        
+        
+        if (empty($user->is_guide)) {
+            $tour->attendee_id = $userId;
+        } else {
+            $tour->tour_guide_id = $userId;
+        }
+        $tour->save();
+
 
         return Redirect::to('/');
     }

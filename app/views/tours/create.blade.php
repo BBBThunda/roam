@@ -20,7 +20,7 @@
     @endforeach
 </ul>
 {{ Form::label('description', 'Tour Description') }}
-{{ Form::text('description') }}
+{{ Form::textarea('description') }}
 
 {{ Form::label('start_time', 'Start Time') }}
 {{ Form::text('start_time') }}
@@ -29,7 +29,14 @@
 {{ Form::text('end_time') }}
 
 {{ Form::label('tour_type_id', 'Tour Type Id') }}
-{{Form::selectRange('tour_type_id', 1, 4)}}
+{{Form::select('tour_type_id', array(
+1 => 'Bars',
+2 => 'History',
+3 => 'Tech',
+4 => 'Food',
+5 => 'Architecture',
+6 => 'City Murals'
+))}}
 
 
 
