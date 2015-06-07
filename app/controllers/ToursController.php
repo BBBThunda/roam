@@ -38,6 +38,7 @@ class ToursController extends \BaseController {
             if (empty(Auth::user()->is_guide)) {
                 return ('[
             {"tour_id":"1",
+            "name":"Super Tour",
             "tour_guide_display_name":"Jason",
             "tour_guide_id":"2",
             "tour_type_id":"1",
@@ -47,6 +48,7 @@ class ToursController extends \BaseController {
             "longitude":"-71.054460"
             },
             {"tour_id":"2",
+            "name":"Epic Tour",
             "tour_guide_display_name":"Anna",
             "tour_guide_id":"1",
             "tour_type_id":"2",
@@ -56,6 +58,7 @@ class ToursController extends \BaseController {
             "longitude":"-71.103550"
             },
             {"tour_id":"3",
+            "name":"AMAZING Tour",
             "tour_guide_display_name":"Bobby",
             "tour_guide_id":"3",
             "tour_type_id":"2",
@@ -112,8 +115,9 @@ class ToursController extends \BaseController {
      */
     public function create()
     {
-        //
-        return "create!";
+
+        return View::make('tours.create');
+
     }
 
 
@@ -125,7 +129,30 @@ class ToursController extends \BaseController {
     public function store()
     {
         //
-        return "store!";
+    /**    $rules = array(
+            'name' => array('required','unique:tours'),
+            'description' => array('required'),
+
+        );
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        */
+
+
+        // Create tour
+        $tour = Tours::create([
+            'name' => Input::get('name'),
+                'description' => Input::get('description'),
+                'tour_type_id' => Input::get('tour_type_id'),
+
+            ]);
+
+        return View::make('users.home');
     }
 
 

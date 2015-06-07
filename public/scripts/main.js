@@ -1,7 +1,3 @@
-console.log("Main Script initialized")
-
-
-
 
 function setup(){
 
@@ -22,7 +18,6 @@ function setup(){
 
 
 }
-
 
 function siteLoad(){
 
@@ -61,20 +56,37 @@ function GetTourHtml (tourData) {
 
   console.log(tourData["tour_id"]);
 
-  return '\
-  <li>\
-        <div class="background">\
-            <img class="guide_pic" src="pictures/stockPic_17.jpg">\
-        </div>\
-        <h4 class="tour_name">Greentown Labs by Saran</h4>\
-        <!--<p>An innovation in of itself, Boston has taken the world of tech by storm over the last decade. Already globally established are the areas innovation centers, incubators, universities, co-workspaces, bio-tech and leading tech businesses. The geographic and innovation diversity does not stop there.  Greentown Labs, based in Somerville, is a camp of some of the world\'s best in environmental technology.As ambitious and innovative as the changing world around us, Greentown is intent on sustaining its pace and impact into the future.</p>-->\
-    </li>';
-
-
-
+  return '<li>\
+      <div class="panel panel-default">\
+            <div class="panel-body text-center">\
+              <h2>'+tourData["name"]+'</h2>\
+              <div class="pull-right">\
+                  <p style="float:right;">Tech<p>\
+              </div>\
+            </div>\
+            <div class="background">\
+              <img src="pictures/stockPic_9.jpg" alt="image" class="guide_pic" />\
+          </div>\
+          <h3 class="tour_name">'+tourData["tour_guide_display_name"]+'</h3>\
+          <div class="pull-right">\
+              <img class="star" src="pictures/Star.png">\
+              <img class="star" src="pictures/Star.png">\
+              <img class="star" src="pictures/Star.png">\
+              <img class="star" src="pictures/Star.png">\
+          </div>\
+          <hr>\
+            <div class="panel-body">\
+              <div>\
+              <h3 style= "text-align:left; float: left;">$33</h3>\
+                <div class="pull-right">\
+                  <a href="#" class="btn btn-primary btn-xs">Check Out This Tour</a>\
+                </div>\
+              </div>\
+            </div>\
+          </div>\
+      </li>'
 
 }
-
 
 $( document ).ready(function() {
   siteLoad();
