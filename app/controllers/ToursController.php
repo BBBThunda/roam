@@ -27,9 +27,10 @@ class ToursController extends \BaseController {
         $jstime1330 = ($time1330*1000);
         
         // Get tours within the user's area
-        if (empty(Auth::user()->is_guide)) {
+        if (!empty(Auth::user()->is_guide)) {
             return ('[
-        {"tour_guide_display_name":"Jason",
+        {"tour_id":"1",
+        "tour_guide_display_name":"Jason",
         "tour_guide_id":"2",
         "tour_type_id":"1",
         "start_time":"' . $time11 . '",
@@ -37,7 +38,8 @@ class ToursController extends \BaseController {
         "latitude":"42.359799",
         "longitude":"-71.054460" 
         },
-        {"tour_guide_display_name":"Anna",
+        {"tour_id":"2",
+        "tour_guide_display_name":"Anna",
         "tour_guide_id":"1",
         "tour_type_id":"2",
         "start_time":"' . $time1130 . '",
@@ -45,7 +47,8 @@ class ToursController extends \BaseController {
         "latitude":"42.381128",
         "longitude":"-71.103550" 
         },
-        {"tour_guide_display_name":"Bobby",
+        {"tour_id":"3",
+        "tour_guide_display_name":"Bobby",
         "tour_guide_id":"3",
         "tour_type_id":"2",
         "start_time":"' . $time13 . '",
@@ -55,7 +58,8 @@ class ToursController extends \BaseController {
         }]');
         } else {
             return ('[
-        {"attendee_display_name":"Julian",
+        {"tour_id":"4",
+        "attendee_display_name":"Julian",
         "tour_type_id":"2",
         "start_time":"' . $time10 . '",
         "end_time":"' . $time12 . '",
@@ -64,7 +68,8 @@ class ToursController extends \BaseController {
         "distance":"10",
         "attendee_id":"4"
         },
-        {"attendee_display_name":"Stuart",
+        {"tour_id":"5",
+        "attendee_display_name":"Stuart",
         "tour_type_id":"1",
         "start_time":"' . $time1130 . '",
         "end_time":"' . $time1230 . '",
