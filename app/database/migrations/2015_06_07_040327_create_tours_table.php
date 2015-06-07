@@ -21,7 +21,7 @@ class CreateToursTable extends Migration {
             $table->integer('latitude');
             $table->integer('longitude');
             $table->integer('attendee_id')->nullable();
-            $table->timestamps;
+            $table->timestamps();
         });
     }
 
