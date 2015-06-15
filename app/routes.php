@@ -11,14 +11,7 @@
 |
  */
 
-Route::get('/', function()
-{
-    return View::make('pages.home');
-});
-
-Route::get('user', function() {
-        return View::make('sessions/user');
-})->before('auth');
+Route::get('/', 'PagesController@home');
 
 Route::get('login', 'SessionsController@create');
 Route::get('logout', 'SessionsController@destroy');

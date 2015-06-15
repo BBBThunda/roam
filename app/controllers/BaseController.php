@@ -20,7 +20,10 @@ class BaseController extends Controller {
          */
         public function __construct() {
             $userId = Auth::id();
-            $user = User::find($userId);
-            View::share('userinfo', $user);
+            if ($userId) {
+                $user = User::find($userId);
+                View::share('userinfo', $user);
+            }
+            return $this;
         }
 }

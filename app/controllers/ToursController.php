@@ -1,9 +1,9 @@
 <?php
 
-class ToursController extends \BaseController {
+class ToursController extends BaseController {
 
     /**
-     * Instantiate a new UserController instance.
+     * Instantiate a new ToursController instance.
      */
     public function __construct() {
         $this->beforeFilter('auth');
@@ -92,7 +92,16 @@ class ToursController extends \BaseController {
             }]');
             }
         } else { // Non-JSON
-            return View::make('tours.index');
+
+            //TODO: Add setting for location and distance
+
+            $location = Input::get('location');
+            $distance = Input::get('distance');
+            
+            //For now just grab all tours from db
+            $data['tours'] = Tour::all();
+
+            return View::make('tours.index')->with('data', $data);
         }
     }
 
@@ -142,20 +151,20 @@ class ToursController extends \BaseController {
                 ->withInput();
         }
 
-        */
+     */
 
 
         // Create tour
-        $tour = Tours::create([
+        $tour = Tour::create([
             'name' => Input::get('name'),
                 'description' => Input::get('description'),
                 'tour_type_id' => Input::get('tour_type_id'),
 
-            ]);
+                ]);
         $userId = Auth::id();
         $user = User::find($userId);
-        
-        
+
+
         if (empty($user->is_guide)) {
             $tour->attendee_id = $userId;
         } else {

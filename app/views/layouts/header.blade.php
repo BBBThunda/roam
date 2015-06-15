@@ -34,7 +34,7 @@ body{
         </a>
         <ul class="nav navbar-nav">
             
-            @if ($userinfo->is_guide)
+            @if (!empty($userinfo->is_guide))
             <li><a href="/tours">Find a Roamer</a></li>
             @else
             <li><a href="/tours">Find a Tour</a></li>
@@ -44,7 +44,7 @@ body{
                 <li><a href="#">Trust &mp; Safety</a></li>
                 <li><a href="quiz">Frequently Asked Questions</a></li>
             </ul>
-            @if ($userinfo->is_guide)
+            @if (!empty($userinfo->is_guide))
             <li><a href="/tours/create">Schedule A Tour</a></li>
             @else
             <li><a href="/tours/create">Request a Tour</a></li>
@@ -57,10 +57,12 @@ body{
             @else
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                @if (!empty($userinfo->display_name))
                 {{{ $userinfo->display_name }}}
+                @endif
                 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="/home">Home</a></li>
+                <li><a href="/tours">Home</a></li>
                 <li><a href="/editProfile">Edit Profile</a></li>
                 <li class="divider"></li>
                 <li><a href="/logout">Sign Out</a></li>
@@ -72,3 +74,4 @@ body{
 
 </div>
 
+<div class="container">

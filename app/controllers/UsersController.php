@@ -53,7 +53,7 @@ class UsersController extends BaseController {
                 'display_name' => Input::get('display_name'),
                 'password' => Hash::make(Input::get('password')),
                 'is_guide' => $isGuide
-            ]);
+                ]);
 
         return View::make('users.welcome');
     }
@@ -97,14 +97,6 @@ class UsersController extends BaseController {
 
         $user = User::find(Auth::id());
 
-/*        // Validate user input
-        $validator = User::validate(Input::all(), $user->id);
-        if ($validator->fails()) {
-            return Redirect::back()
-                ->withErrors($validator)
-                ->withInput();
-        }
- */
         if (!$user) {
             return App::abort(403);
         }
@@ -116,7 +108,15 @@ class UsersController extends BaseController {
             'password' => array('confirmed')
         );
 
-            // Update user table
+/*        // Validate user input
+        $validator = User::validate(Input::all(), $user->id);
+        if ($validator->fails()) {
+            return Redirect::back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+ */
+        // Update user table
         try {
             $user->display_name = Input::get('display_name');
             if(!empty(Input::get('password'))) {
