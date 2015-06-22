@@ -100,7 +100,8 @@ class ToursController extends BaseController {
             
             //For now just grab all tours from db
             $data['tours'] = Tour::all();
-
+            $data['users'] = User::all();
+            
             return View::make('tours.index')->with('data', $data);
         }
     }

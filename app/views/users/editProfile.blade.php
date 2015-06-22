@@ -2,18 +2,15 @@
 
 @section('bodyContent')
 
+<style type="text/css">
+    img .user_image {
+        display: block;
+    }
+</style>
+
 <h1>Edit Profile</h1>
 
-{{ Form::open([ 'route' => 'users.update' ]) }}
-
-{{-- Email address field. -------------------}}
-<ul class="errors">
-    @foreach($errors->get('email') as $message)
-    <li>{{ $message }}</li>
-    @endforeach
-</ul>
-{{ Form::label('email', 'Email address') }}
-{{ Form::email('email', $user->email, ['autofocus', 'autofocus']) }}
+{{ Form::open([ 'route' => 'users.update', 'files' => true ]) }}
 
 {{-- Display name field. ------------------------}}
 <ul class="errors">
@@ -23,6 +20,28 @@
 </ul>
 {{ Form::label('display_name', 'Display name') }}
 {{ Form::text('display_name', $user->display_name) }}
+
+@if ($user)
+<img class="user_image" src="{{ $user->photos->first()->getUrl() }}" />
+@endif
+
+{{-- Upload image ------------------------}}
+<ul class="errors">
+    @foreach($errors->get('profile_pic') as $message)
+    <li>{{ $message }}</li>
+    @endforeach
+</ul>
+{{ Form::label('profile_pic', 'Upload Profile Pic') }}
+{{ Form::file('profile_pic') }}
+
+{{-- Email address field. -------------------}}
+<ul class="errors">
+    @foreach($errors->get('email') as $message)
+    <li>{{ $message }}</li>
+    @endforeach
+</ul>
+{{ Form::label('email', 'Email address') }}
+{{ Form::email('email', $user->email, ['autofocus', 'autofocus']) }}
 
 {{-- Password field. ------------------------}}
 <ul class="errors">

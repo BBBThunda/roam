@@ -16,7 +16,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
         protected $table = 'users';
 
-        protected $fillable = array('email', 'display_name', 'password', 'is_guide');
+        protected $fillable = array('email', 'display_name', 'password',
+            'is_guide');
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -24,5 +25,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password', 'remember_token');
+
+        // Photos relationship
+        public function photos() {
+            return $this->hasMany('Photo', 'user_id');
+        }
 
 }

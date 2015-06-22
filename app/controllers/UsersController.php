@@ -2,14 +2,6 @@
 
 class UsersController extends BaseController {
 
-    /*
-    |------------------
-    | Users Controller
-    |------------------
-    |
-    |
-     */
-
     /**
      * Display registration page
      *
@@ -19,7 +11,6 @@ class UsersController extends BaseController {
     {
         return View::make('users.register');
     }
-
 
 
 
@@ -35,7 +26,7 @@ class UsersController extends BaseController {
         $rules = array(
             'email' => array('required', 'email', 'unique:users'),
             'display_name' => array('required', 'alpha_num', 'min:3', 'max:32', 'unique:users'),
-            'password' => array('required', 'confirmed')
+            'password' => array('min:4', 'required', 'confirmed')
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
@@ -60,7 +51,6 @@ class UsersController extends BaseController {
 
 
 
-
     /**
      * editProfile
      * Display form for logged in user to edit their profile
@@ -82,7 +72,6 @@ class UsersController extends BaseController {
 
 
 
-
     /**
      * updateProfile
      * Update logged in user's profile
@@ -101,42 +90,69 @@ class UsersController extends BaseController {
             return App::abort(403);
         }
 
+        // Define validation rules
+        $rules = [
+            'email' => ['required', 'email'],
+            'display_name' => ['required', 'alpha_num', 'min:3', 'max:32'],
+            'password' => ['min:4', 'confirmed'],
+            'profile_pic' => ['image']
+            ];
+        // If email or display name is being changed it must be unique
+        // TODO: add validation by sending an actual email
+        if (Input::get('email') != $user->email) {
+            $rules['email'][] = 'unique:users'; 
+        }
+        if (Input::get('display_name') != $user->display_name) {
+            $rules['display_name'][] = 'unique:users';
+        }
         // Validate user input
-        $rules = array(
-            'email' => array('required', 'email', 'unique:users'),
-            'display_name' => array('required', 'alpha_num', 'min:3', 'max:32', 'unique:users'),
-            'password' => array('confirmed')
-        );
-
-/*        // Validate user input
-        $validator = User::validate(Input::all(), $user->id);
+        $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
-            return Redirect::back()
-                ->withErrors($validator)
-                ->withInput();
+            return Redirect::back()->withErrors($validator)->withInput();
         }
- */
+
         // Update user table
-        try {
-            $user->display_name = Input::get('display_name');
-            if(!empty(Input::get('password'))) {
-                $user->password = Hash::make(Input::get('password'));
+        $user->display_name = Input::get('display_name');
+        if(!empty(Input::get('password'))) {
+            $user->password = Hash::make(Input::get('password'));
+        }
+        $isGuide = !empty(Input::get('is_guide')) ? 1 : 0;
+        $user->is_guide = $isGuide;
+        $user->save();
+
+        if (Input::hasFile('profile_pic')) {
+            // Get existing photo(s) to be replaced
+            $oldPhoto = $user->photos()->first();
+
+            // Generate filepath based on ID and extension
+            $file = Input::file('profile_pic');
+
+            // First insert empty photo record to get an ID                
+            $photo = new Photo();
+            $photo->user_id = Auth::id();
+            $photo->extension = $file->getClientOriginalExtension();
+            $photo->save();
+
+            // Update photo record and move file
+            // TODO: add error handling
+            $file->move($photo->getDirectory(), $photo->getFilename());
+            $photo->save();
+
+            $user->photos()->save($photo);
+            if ($oldPhoto) {
+                if (!empty($oldPhoto->getFilepath())) {
+                    File::delete($oldPhoto->getFilepath());
+                }
+                $oldPhoto->delete();
             }
-            $isGuide = !empty(Input::get('is_guide')) ? 1 : 0;
-            $user->is_guide = $isGuide;
-            $user->save();
         }
-        catch (Exception $e) {
-            $message = 'Sorry, we were unable to update this profile due to the following issue: '
-                . $e->getMessage();
-            return Redirect::back()->with('message', $message);
-        }
+        // TODO: Add error handling here
+
+        $message = 'Profile pic updated successfully!';
 
         return Redirect::to('/tours')->with('message', $message);
 
     }
-
-
 
 
 
