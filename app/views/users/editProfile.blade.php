@@ -3,7 +3,7 @@
 @section('bodyContent')
 
 <style type="text/css">
-    img .user_image {
+    img.user_image {
         display: block;
     }
 </style>
