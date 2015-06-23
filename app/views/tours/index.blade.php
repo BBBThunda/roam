@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="background">
-                    <img src="pictures/stockPic_9.jpg" alt="image"
+                    <img src="{{ $tour->guide->first()->photos->first()->getUrl() }}" alt="image"
                     class="guide_pic" />
                 </div>
                 <div class="text">

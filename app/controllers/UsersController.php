@@ -122,7 +122,7 @@ class UsersController extends BaseController {
 
         if (Input::hasFile('profile_pic')) {
             // Get existing photo(s) to be replaced
-            $oldPhoto = $user->photos()->first();
+            $oldPhotos = $user->photos()->get();
 
             // Generate filepath based on ID and extension
             $file = Input::file('profile_pic');
@@ -135,11 +135,12 @@ class UsersController extends BaseController {
 
             // Update photo record and move file
             // TODO: add error handling
+            // TODO: add a random seed or hash to filename so they aren't browsable
             $file->move($photo->getDirectory(), $photo->getFilename());
             $photo->save();
 
             $user->photos()->save($photo);
-            if ($oldPhoto) {
+            foreach ($oldPhotos as $oldPhoto) {
                 if (!empty($oldPhoto->getFilepath())) {
                     File::delete($oldPhoto->getFilepath());
                 }
