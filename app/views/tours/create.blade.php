@@ -4,18 +4,18 @@
 
 {{ Form::open([ 'route' => 'tours.store' ]) }}
 
-{{-- Email address field. -------------------}}
+{{-- Tour name field. -------------------}}
 <ul class="errors">
-    @foreach($errors->get('email') as $message)
+    @foreach($errors->get('name') as $message)
     <li>{{ $message }}</li>
     @endforeach
 </ul>
 {{ Form::label('name', 'Tour Name') }}
 {{ Form::text('name', '', ['autofocus', 'autofocus']) }}
 
-{{-- Display name field. ------------------------}}
+{{-- Description field. -----------------}}
 <ul class="errors">
-    @foreach($errors->get('display_name') as $message)
+    @foreach($errors->get('description') as $message)
     <li>{{ $message }}</li>
     @endforeach
 </ul>
@@ -37,6 +37,15 @@
 5 => 'Architecture',
 6 => 'City Murals'
 ))}}
+
+{{-- Description field. -----------------}}
+<ul class="errors">
+    @foreach($errors->get('description') as $message)
+    <li>{{ $message }}</li>
+    @endforeach
+</ul>
+{{ Form::label('price', 'Tour Price') }}
+{{ Form::text('price') }}
 
 
 

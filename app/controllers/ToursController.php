@@ -160,7 +160,7 @@ class ToursController extends BaseController {
             'name' => Input::get('name'),
                 'description' => Input::get('description'),
                 'tour_type_id' => Input::get('tour_type_id'),
-
+                'price' => Input::get('price')
                 ]);
         $userId = Auth::id();
         $user = User::find($userId);
@@ -171,6 +171,7 @@ class ToursController extends BaseController {
         } else {
             $tour->tour_guide_id = $userId;
         }
+        $tour->price = Input::get('price');
         $tour->save();
 
 

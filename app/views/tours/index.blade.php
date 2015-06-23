@@ -80,7 +80,7 @@
 
         <ul id="tourDataContainer">
             
-            @foreach ($data['tours'] as $tour)
+            @foreach ($data['tours']->reverse() as $tour)
             <li>
             <div class="panel panel-default">
                 <div class="panel-body text-center">
@@ -105,7 +105,10 @@
                     <hr>
                     <div class="panel-body">
                         <div>
-                            <h3 style= "text-align:left; float: left;">$33</h3>
+                            @if ($tour->price)
+                            <h3 style= "text-align:left; float: left;"
+                                >${{ $tour->price }}</h3>
+                            @endif
                             <div class="pull-right">
                                 <a href="#" class="btn btn-primary btn-xs">Check Out This Tour</a>
                             </div>
