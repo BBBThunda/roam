@@ -27,23 +27,23 @@
         text-align: center;
         padding-bottom: 4%;
     }
-    .background {
+    .tour_image{
         background-image: url("images/quincy.jpg");
         width: 400px;
         height: 250px;
         margin-left: auto;
         margin-right: auto;
+        opacity: 0.25
     }
     .guide_pic {
         border-right: 8px solid white;
         border-bottom: 8px solid white;
-
+        background: white;
     }
     .tour_guide_name {
         padding-top: 10px;
         padding-bottom: 10px;
         margin: 0px;
-        display:inline;
     }
 
     ul
@@ -81,6 +81,17 @@
         <ul id="tourDataContainer">
             
             @foreach ($data['tours']->reverse() as $tour)
+            <?php
+            $guide = NULL;
+            $attendee = NULL;
+            if (count($tour->guide)) {
+                $guide = $tour->guide()->first();
+            }
+            if (count($tour->attendee)) {
+                $attendee = $tour->attendee()->first();
+            }
+            ?>
+            
             <li>
             <div class="panel panel-default">
                 <div class="panel-body text-center">
@@ -88,20 +99,38 @@
                     <div class="pull-right">
                     </div>
                 </div>
-                <div class="background">
-                    <img src="{{ $tour->guide->first()->photos->first()->getUrl() }}" alt="image"
-                    class="guide_pic" />
+                <div class="tour_image">
+                    @if ($tour->description)
+                    <p>{{ $tour->description }}</p>
+                    @endif
                 </div>
                 <div class="text">
+
+                    @if (!empty($guide->display_name))
                     <h3 class="tour_guide_name">
-                        {{{ $tour->guide->first()->display_name }}}</h3>
+                        {{{ $guide->display_name }}}</h3>
+                    @elseif (!empty($attendee->display_name))
+                    <h3 class="attendee_name">
+                        {{{ $attendee->display_name }}}</h3>
+                    @endif
+
                     <div class="pull-right">
+                        {{--TODO: Make this dynamic after we add ratings tables --}}
                         <img class="star" src="pictures/Star.png">
                         <img class="star" src="pictures/Star.png">
                         <img class="star" src="pictures/Star.png">
                         <img class="star" src="pictures/Star.png">
                         <img class="star" src="pictures/Star.png">
                     </div>
+                    @if (!empty($guide) && count($guide->photos))
+                    <img src="{{
+                    $guide->photos->first()->getUrl() }}"
+                    alt="image" class="guide_pic" />
+                    @elseif (!empty($attendee) && count($attendee->photos))
+                    <img src="{{
+                    $attendee->photos->first()->getUrl() }}"
+                    alt="image" class="guide_pic" />
+                    @endif
                     <hr>
                     <div class="panel-body">
                         <div>
@@ -109,9 +138,17 @@
                             <h3 style= "text-align:left; float: left;"
                                 >${{ $tour->price }}</h3>
                             @endif
+                            @if ($tour->canCheckOut(Auth::id()))
                             <div class="pull-right">
-                                <a href="#" class="btn btn-primary btn-xs">Check Out This Tour</a>
+                                <a href="#" class="btn btn-primary btn-xs"
+                                    >Check Out This Tour</a>
                             </div>
+                            @elseif ($tour->canClaim(Auth::id()))
+                            <div class="pull-right">
+                                <a href="#" class="btn btn-primary btn-xs"
+                                    >Give This Tour</a>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -128,7 +165,7 @@
                     <div class="pull-right">
                     </div>
                 </div>
-                <div class="background">
+                <div class="tour_image">
                     <img src="pictures/stockPic_9.jpg" alt="image" class="guide_pic" />
                 </div>
                 <div class="text">
@@ -149,7 +186,7 @@
                                 <div class="pull-right">
                                 </div>
                             </div>
-                            <div class="background">
+                            <div class="tour_image">
                                 <img src="pictures/anna.jpg" alt="image" class="guide_pic" />
                             </div>
                             <div class="text">
@@ -181,7 +218,7 @@
                                 <div class="pull-right">
                                 </div>
                             </div>
-                            <div class="background">
+                            <div class="tour_image">
                                 <img src="pictures/stockPic_17.jpg" alt="image" class="guide_pic" />
                             </div>
                             <div class="text">

@@ -87,6 +87,20 @@
 <div class="row">
     <div class="col-sm-6 col-md-4 col-md-offset-4">
         <h2 class="text-center login-title">Log In</h2>
+
+        {{-- Email field. -----------------}}
+        <ul class="errors">
+            @foreach($errors->get('email') as $message)
+            <li>{{ $message }}</li>
+            @endforeach
+        </ul>
+        {{-- Password field. -----------------}}
+        <ul class="errors">
+            @foreach($errors->get('password') as $message)
+            <li>{{ $message }}</li>
+            @endforeach
+        </ul>
+
         {{ Form::open(array('route' => 'sessions.store',
         'class' => 'form-horizontal form-signin',
         'role' => 'form')) }}

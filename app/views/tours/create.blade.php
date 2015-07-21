@@ -10,8 +10,9 @@
     <li>{{ $message }}</li>
     @endforeach
 </ul>
-{{ Form::label('name', 'Tour Name') }}
-{{ Form::text('name', '', ['autofocus', 'autofocus']) }}
+{{-- Form::label('name', 'Tour Name') --}}
+{{ Form::text('name', '', ['autofocus' => 'autofocus',
+'placeholder' => 'Tour Name']) }}
 
 {{-- Description field. -----------------}}
 <ul class="errors">
@@ -19,16 +20,58 @@
     <li>{{ $message }}</li>
     @endforeach
 </ul>
-{{ Form::label('description', 'Tour Description') }}
-{{ Form::textarea('description') }}
+{{-- Form::label('description', 'Tour Description') --}}
+{{ Form::textarea('description', '', [
+'placeholder' => 'Describe this tour.']) }}
 
+{{-- TODO: ADD DATE/TIME PICKER --}}
+<?php //dd(Config::get('app.timezone'));
+//dd(date_default_timezone_get()); ?>
+{{-- Start date field. -----------------}}
+<ul class="errors">
+    @foreach($errors->get('start_date') as $message)
+    <li>{{ $message }}</li>
+    @endforeach
+</ul>
+{{ Form::label('start_date', 'Start Date') }}
+{{ Form::text('start_date', $data['defaultStartDate'], array(
+'placeholder' => 'MM/DD/YYYY'
+)) }}
+
+{{-- Start time field. -----------------}}
+<ul class="errors">
+    @foreach($errors->get('start_time') as $message)
+    <li>{{ $message }}</li>
+    @endforeach
+</ul>
 {{ Form::label('start_time', 'Start Time') }}
-{{ Form::text('start_time') }}
+{{ Form::text('start_time', $data['defaultStartTime'], array(
+'placeholder' => 'HH:MM am'
+)) }}
 
+{{-- End date field. -----------------}}
+<ul class="errors">
+    @foreach($errors->get('end_date') as $message)
+    <li>{{ $message }}</li>
+    @endforeach
+</ul>
+{{ Form::label('end_date', 'End Date') }}
+{{ Form::text('end_date', $data['defaultEndDate'], array(
+'placeholder' => 'MM/DD/YYYY'
+)) }}
+
+{{-- End time field. -----------------}}
+<ul class="errors">
+    @foreach($errors->get('end_time') as $message)
+    <li>{{ $message }}</li>
+    @endforeach
+</ul>
 {{ Form::label('end_time', 'End Time') }}
-{{ Form::text('end_time') }}
+{{ Form::text('end_time', $data['defaultEndTime'], array(
+'placeholder' => 'HH:MM am'
+)) }}
 
-{{ Form::label('tour_type_id', 'Tour Type Id') }}
+{{ Form::label('tour_type_id', 'Type') }}
 {{Form::select('tour_type_id', array(
 1 => 'Bars',
 2 => 'History',
@@ -38,22 +81,20 @@
 6 => 'City Murals'
 ))}}
 
-{{-- Description field. -----------------}}
+{{-- Price field. -----------------}}
 <ul class="errors">
-    @foreach($errors->get('description') as $message)
+    @foreach($errors->get('price') as $message)
     <li>{{ $message }}</li>
     @endforeach
 </ul>
-{{ Form::label('price', 'Tour Price') }}
-{{ Form::text('price') }}
-
-
+{{ Form::label('price', 'Price') }}
+{{ Form::text('price', '', array(
+'placeholder' => 'Price (USD)'
+)) }}
 
 {{-- Form submit button. --------------------}}
-{{ Form::submit('Create') }}
+{{ Form::submit('Create', array('class' => 'btn btn-lg btn-info btn-block')) }}
 
 {{ Form::close() }}
-
-<p>Already have an account? <a href="/login">Log In</a></p>
 
 @stop

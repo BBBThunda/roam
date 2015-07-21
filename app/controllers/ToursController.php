@@ -11,12 +11,15 @@ class ToursController extends BaseController {
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of tours
      *
      * @return Response
      */
     public function index()
     {
+        // For now we return dummy data for JSON requests
+        // TODO: Make this return live data
+        // TODO: Include lat/long coordinates
         if (Request::wantsJson()) {
             $time10 = strtotime('2015-06-07 10:00:00' . ' EST');
             $time1030 = strtotime('2015-06-07 10:30:00' . ' EST');
@@ -106,16 +109,26 @@ class ToursController extends BaseController {
         }
     }
 
-    public function claim($tour_id) {
-        // Get tours within the user's area
-        if (!empty(Auth::user()->is_guide)) {
-            $fail=false;
-            if ($fail) {
-                App::abort(500);
-            } else {
-                return '{}';
-            }
+    /**
+     * Offer to give a requested tour
+     *
+     * @param $tourId
+     */
+    public function claim($tourId) {
+
+        $tour = Tour::find($tourId);
+
+        if ($tour->canClaim()) {
+
+            // Claim Tour
+            $tour->claim(Auth::id());
+
+            // TODO: Return success
+
         }
+
+        // TODO: Return error
+
     }
 
 
@@ -126,24 +139,46 @@ class ToursController extends BaseController {
      */
     public function create()
     {
+        // TODO: Move these to constants
+        $quarterHour = 15 * 60;
+        $hour = 60 * 60;
+        $displayStringTime = 'h:i a';
+        $displayStringDate = 'm/d/Y';
 
-        return View::make('tours.create');
+        // Populate view
 
+        // Default start time to next hour rounded to nearest 15 min
+        $defaultStartTime = time() + $hour + $quarterHour -
+            (time() % $quarterHour);
+        $data['defaultStartTime'] = date($displayStringTime, $defaultStartTime);
+        $data['defaultStartDate'] = date($displayStringDate, $defaultStartTime);
+
+        $defaultEndTime = $defaultStartTime + $hour;
+        $data['defaultEndTime'] = date($displayStringTime, $defaultEndTime);
+        $data['defaultEndDate'] = date($displayStringDate, $defaultEndTime);
+
+        return View::make('tours.create')->with('data', $data);
     }
 
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created tour
      *
      * @return Response
      */
     public function store()
     {
-        //
-    /**    $rules = array(
+
+        // Validate input
+        $rules = array(
             'name' => array('required','unique:tours'),
             'description' => array('required'),
-
+            'start_date' => array('required', 'date_format:m/d/Y'),
+            'start_time' => array('required', 'date_format:h:i a'),
+            'end_date' => array('required', 'date_format:m/d/Y'),
+            'end_time' => array('required', 'date_format:h:i a'),
+            //'tour_type_id' => array(''),
+            'price' => array('numeric')
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
@@ -152,7 +187,6 @@ class ToursController extends BaseController {
                 ->withInput();
         }
 
-     */
 
 
         // Create tour
@@ -160,7 +194,9 @@ class ToursController extends BaseController {
             'name' => Input::get('name'),
                 'description' => Input::get('description'),
                 'tour_type_id' => Input::get('tour_type_id'),
-                'price' => Input::get('price')
+                'price' => Input::get('price'),
+                'start_time' => Input::get('start_time'),
+                'end_time' => Input::get('end_time')
                 ]);
         $userId = Auth::id();
         $user = User::find($userId);
@@ -180,12 +216,12 @@ class ToursController extends BaseController {
 
 
     /**
-     * Display the specified resource.
+     * Display the specified tour.
      *
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($tourId)
     {
         //
         return "show!";
@@ -193,12 +229,12 @@ class ToursController extends BaseController {
 
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified tour.
      *
-     * @param  int  $id
+     * @param  int  $tourId
      * @return Response
      */
-    public function edit($id)
+    public function edit($tourId)
     {
         //
         return "edit!";
@@ -206,24 +242,24 @@ class ToursController extends BaseController {
 
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified tour
      *
-     * @param  int  $id
+     * @param  int  $tourId
      * @return Response
      */
-    public function update($id)
+    public function update($tourId)
     {
         //
     }
 
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified tour
      *
-     * @param  int  $id
+     * @param  int  $tourId
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($tourId)
     {
         //
     }

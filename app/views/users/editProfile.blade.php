@@ -21,7 +21,7 @@
 {{ Form::label('display_name', 'Display name') }}
 {{ Form::text('display_name', $user->display_name) }}
 
-@if ($user)
+@if (count($user->photos))
 <img class="user_image" src="{{ $user->photos->first()->getUrl() }}" />
 @endif
 
