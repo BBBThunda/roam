@@ -27,6 +27,7 @@
         text-align: center;
         padding-bottom: 4%;
     }
+/*
     .tour_image{
         background-image: url("images/quincy.jpg");
         width: 400px;
@@ -34,6 +35,32 @@
         margin-left: auto;
         margin-right: auto;
         opacity: 0.25
+    }
+*/
+    .tour_image{
+        position: relative;
+        width: 400px;
+        height: 250px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .tour_image > p {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .tour_image > img {
+        opacity: 0.4;
+    }
+    .tour_image > p span {
+        display:block;
+        color: white; 
+        font: bold 12px/24px Helvetica, Sans-Serif; 
+        background: rgb(0, 0, 0); /* fallback color */
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
     }
     .guide_pic {
         border-right: 8px solid white;
@@ -100,8 +127,9 @@
                     </div>
                 </div>
                 <div class="tour_image">
+                    <img src="images/quincy.jpg" />
                     @if ($tour->description)
-                    <p>{{ $tour->description }}</p>
+                    <p><span>{{ $tour->description }}</span></p>
                     @endif
                 </div>
                 <div class="text">
@@ -133,6 +161,15 @@
                     @endif
                     <hr>
                     <div class="panel-body">
+{{-- LEFT OFF HERE!!!!!!!!! CONFLICTS WITH CHECKOUT BUTTON --}}
+                        <div class="pull-right">
+                            @if ($tour->start_time != '0000-00-00 00:00:00')
+                            <p>Starts: {{$tour->start_time}}</p>
+                            @endif
+                            @if ($tour->end_time)
+                            <p>Ends: {{$tour->end_time}}</p>
+                            @endif
+                        </div>
                         <div>
                             @if ($tour->price)
                             <h3 style= "text-align:left; float: left;"

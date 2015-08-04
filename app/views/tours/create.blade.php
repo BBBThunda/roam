@@ -25,8 +25,7 @@
 'placeholder' => 'Describe this tour.']) }}
 
 {{-- TODO: ADD DATE/TIME PICKER --}}
-<?php //dd(Config::get('app.timezone'));
-//dd(date_default_timezone_get()); ?>
+
 {{-- Start date field. -----------------}}
 <ul class="errors">
     @foreach($errors->get('start_date') as $message)

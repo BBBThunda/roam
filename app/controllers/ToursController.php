@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class ToursController extends BaseController {
 
     /**
@@ -187,29 +189,32 @@ class ToursController extends BaseController {
                 ->withInput();
         }
 
+        $userId = Auth::id();
 
+        // Convert input dates and times to MySQL-Friendly DateTime strings
+        $startTime = Helpers\DBConvert::dateToDB(Input::get('start_date'),
+            Input::get('start_time'));
+        $endTime = Helpers\DBConvert::dateToDB(Input::get('end_date'),
+            Input::get('end_time'));
 
         // Create tour
         $tour = Tour::create([
             'name' => Input::get('name'),
                 'description' => Input::get('description'),
                 'tour_type_id' => Input::get('tour_type_id'),
-                'price' => Input::get('price'),
-                'start_time' => Input::get('start_time'),
-                'end_time' => Input::get('end_time')
+                'price' => Input::get('price')
                 ]);
-        $userId = Auth::id();
         $user = User::find($userId);
-
-
+        $tour->price = Input::get('price');
         if (empty($user->is_guide)) {
             $tour->attendee_id = $userId;
         } else {
             $tour->tour_guide_id = $userId;
         }
-        $tour->price = Input::get('price');
-        $tour->save();
+        $tour->start_time = $startTime;
+        $tour->end_time = $endTime;
 
+        $tour->save();
 
         return Redirect::to('/');
     }
