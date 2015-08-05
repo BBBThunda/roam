@@ -11,6 +11,15 @@
     body{
         background-color: #F2F2F2;
     }
+    h1 {
+        text-align: center;
+        padding-bottom: 4%;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
     .one {
         float:left;
         width: 43%;
@@ -23,21 +32,11 @@
         height: 100%;
         margin-right:50px;
     }
-    h1 {
-        text-align: center;
-        padding-bottom: 4%;
+    /* Workaround to keep contents within the panel-body */
+    .panel-body {
+        padding-bottom: 20px;
     }
-/*
-    .tour_image{
-        background-image: url("images/quincy.jpg");
-        width: 400px;
-        height: 250px;
-        margin-left: auto;
-        margin-right: auto;
-        opacity: 0.25
-    }
-*/
-    .tour_image{
+    .tour_image {
         position: relative;
         width: 400px;
         height: 250px;
@@ -71,13 +70,6 @@
         padding-top: 10px;
         padding-bottom: 10px;
         margin: 0px;
-    }
-
-    ul
-    {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
     }
     #tourDataContainer li {
         padding: 0px 5px 40px 5px;
