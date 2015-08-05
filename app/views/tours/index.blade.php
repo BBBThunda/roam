@@ -3,13 +3,22 @@
 @section('bodyContent')
 
 <style type="text/css">
+    body{
+        background-color: #F2F2F2;
+    }
+    h1 {
+        text-align: center;
+        padding-bottom: 4%;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
     #map_canvas {
         border-style: solid;
         border-width: 5px;
         height: 500px;
-    }
-    body{
-        background-color: #F2F2F2;
     }
     .one {
         float:left;
@@ -23,20 +32,10 @@
         height: 100%;
         margin-right:50px;
     }
-    h1 {
-        text-align: center;
-        padding-bottom: 4%;
+    /* Workaround to keep contents within the panel-body
+    .panel-body {
+        padding-bottom: 70px;
     }
-/*
-    .tour_image{
-        background-image: url("images/quincy.jpg");
-        width: 400px;
-        height: 250px;
-        margin-left: auto;
-        margin-right: auto;
-        opacity: 0.25
-    }
-*/
     .tour_image{
         position: relative;
         width: 400px;
@@ -71,13 +70,6 @@
         padding-top: 10px;
         padding-bottom: 10px;
         margin: 0px;
-    }
-
-    ul
-    {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
     }
     #tourDataContainer li {
         padding: 0px 5px 40px 5px;
